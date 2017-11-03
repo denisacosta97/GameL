@@ -4,11 +4,13 @@ package com.denisacosta.lgame;
  * Created by root on 02/11/17.
  */
 
-class Coord {
+public class Coord {
     int x;
     int y;
 
     public Coord() {
+        this.x = 100;
+        this.y = 100;
     }
 
     public Coord(int x, int y) {
