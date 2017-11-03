@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="nullButton">
+        <item name="android:colorBackground">@android:color/transparent</item>
+    </style>
+
 </resources>

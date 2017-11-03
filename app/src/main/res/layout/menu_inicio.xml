@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tumblr_inline_mwbs3lUeSG1qkc0d3"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:weightSum="5">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@android:dimen/app_icon_size"
+        android:layout_weight="2"
+        android:paddingTop="20dp"
+        android:src="@drawable/horseIcon"></ImageView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="40dp"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/facil"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:backgroundTint="@color/botonInicio"
+            android:text="Facil"
+            android:textColor="@color/botonLetras"
+            android:textSize="23dp"
+            android:fontFamily="monospace"/>
+
+        <Button
+            android:id="@+id/medio"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:backgroundTint="@color/botonInicio"
+            android:fontFamily="monospace"
+            android:text="Medio"
+            android:textColor="@color/botonLetras"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/dificil"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:backgroundTint="@color/botonInicio"
+            android:text="Dificil"
+            android:textColor="@color/botonLetras"
+            android:textSize="23dp"
+            android:fontFamily="monospace"/>
+    </LinearLayout>
+</LinearLayout>

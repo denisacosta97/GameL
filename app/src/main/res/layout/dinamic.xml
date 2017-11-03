@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/tumblr_inline_mwbs3lUeSG1qkc0d3">
 
 
     <LinearLayout
@@ -21,11 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Piezas"
-            android:background="#665fb8"/>
 
     </LinearLayout>
 

@@ -33,7 +33,12 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
         LinearLayout layoutVertical = (LinearLayout) findViewById(R.id.livLayout);
         LinearLayout rowLayout = null;
 
+        int k = 0;
+        Coord[] path = generatePath(COLUMNAS,FILAS,k);
+
         int count = (COLUMNAS*FILAS)+1; //
+
+
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -91,7 +96,7 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void setY(int y) {
-        POSICION.setX(y);
+        POSICION.setY(y);
     }
 
 /*  CAMBIO: cada vez que se hace un movimiento, aumenta el contador y se compara con el total de espacios
@@ -117,6 +122,7 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
         Coord[] path = new Coord[k];
         Coord posicionNueva = new Coord();
         path[0] = posicionNueva;
+
         for(int c = 1; c < k; c++){ //Ciclo para lograr un camino de longitud K.
             Coord[] posibilidades = movPosibles(posicionNueva); //Determinar las posibles ubicaciones a las cuales se puede mover desde posicionNueva
             if(posibilidades.length > 0 ){      //Si puede hacer al menos un movimiento desde posicionNueva
