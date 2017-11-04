@@ -1,4 +1,4 @@
-package com.denisacosta.lgame;
+package com.denisacosta.lgame.Component;
 
 /**
  * Created by root on 02/11/17.
