@@ -11,6 +11,10 @@ import android.widget.Toast;
 
 import com.denisacosta.lgame.R;
 
+/**
+ * Primera clase estatica de prueba, CANDIDATA A SER BORRADA
+ */
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button[][] buttons = new Button[3][4];

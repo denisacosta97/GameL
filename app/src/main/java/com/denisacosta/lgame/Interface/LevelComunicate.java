@@ -2,8 +2,8 @@ package com.denisacosta.lgame.Interface;
 
 import android.content.Context;
 
-/**
- * Created by Denis on 4/11/2017.
+/*
+Interfaz que permite la comunicacion del Nivel con la Actividad de PlayZone
  */
 
 public interface LevelComunicate {

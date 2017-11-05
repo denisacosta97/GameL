@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">LGame</string>
+    <string name="txtFacil">Facil</string>
+    <string name="txtMedio">Medio</string>
+    <string name="txtDificil">Dificil</string>
+    <string name="txtFilas">Filas</string>
+    <string name="txtColumnas">Columnas</string>
+    <string name="txtX">X</string>
+    <string name="txtY">Y</string>
+    <string name="txtJugar">JUGAR</string>
+
+    <string name="txtNivel">Nivel 1</string>
+    <string name="txtGanaste">¡GANASTE!</string>
+    <string name="txtDescGanaste">Acabas de completar el %s en %s\n ¡FELICIDADES!</string>
+    <string name="txtPerdiste">¡PERDISTE!</string>
+    <string name="txtDescPerdiste">¡Te quedaste sin movimientos! ¡Empieza de nuevo!</string>
+    <string name="txtReiniciar">REINICIAR</string>
+    <string name="txtSalir">SALIR</string>
+
+    <string name="timeFormat">%2d min %2d seg</string>
 </resources>

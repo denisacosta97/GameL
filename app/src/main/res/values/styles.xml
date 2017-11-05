@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- Base application theme. -->
+    //Estilo por defecto de la App
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    //Estilo de boton transparente
     <style name="nullButton">
 
         <item name="android:colorBackground">@android:color/transparent</item>

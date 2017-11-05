@@ -1,4 +1,4 @@
-package com.denisacosta.lgame;
+package com.denisacosta.lgame.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.denisacosta.lgame.Others.DynamicActivity;
+import com.denisacosta.lgame.R;
 import com.denisacosta.lgame.Util.Util;
 
-/**
- * Created by Denis on 3/11/2017.
+/*
+Clase principal del juego
  */
 
 public class InicioActivity extends AppCompatActivity implements View.OnClickListener {

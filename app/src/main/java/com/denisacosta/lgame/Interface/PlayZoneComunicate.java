@@ -1,7 +1,8 @@
 package com.denisacosta.lgame.Interface;
 
-/**
- * Created by Denis on 5/11/2017.
+/*
+Interfaz que permite la comunicacion de la actividad PlayZone
+con el Fragment Nivel
  */
 
 public interface PlayZoneComunicate {

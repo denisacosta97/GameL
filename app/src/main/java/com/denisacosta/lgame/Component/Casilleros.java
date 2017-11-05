@@ -1,6 +1,8 @@
 package com.denisacosta.lgame.Component;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.widget.Button;
 
@@ -24,13 +26,16 @@ public class Casilleros {
     private int espacioOcupado = 0;
 
     private Coord POSICION;
-    private Button[][] buttons;
+    private AppCompatButton[][] buttons;
     private int[][] BORDES;
-    //Sirve de prueba para verificar los caminos
     private int[][] CAMINOS_POSIBLES;
-    public Context cont;
+    private Context cont;
 
 
+    /*
+    Metodo constructor que inicializa todos los valores
+    que tengra un nivel determinado
+     */
     public Casilleros(int filas, int columnas, int x, int y, Context c) {
 
         FILAS = filas;
@@ -41,50 +46,58 @@ public class Casilleros {
         cont = c;
         espacioTotal = (COLUMNAS * FILAS);
         POSICION = new Coord(x, y);
-        buttons = new Button[filas][columnas];
+        buttons = new AppCompatButton[filas][columnas];
         BORDES = new int[filas][columnas];
         CAMINOS_POSIBLES = new int[filas][columnas];
     }
 
-    public int getCOLUMNAS() {
-        return COLUMNAS;
-    }
 
+    /*
+    Metodo que permite reiniciar el juego cada vez que sea
+    necesario
+     */
     public void selectInicio() {
 
         cleanBackground();
 
+        //Reseteo el contador de espacios ocupados
         espacioOcupado = 1;
-
+        //Indico cual es el casillero de inicio y lo colorea
+        //Ademas establece que ya no es un camino posible
         BORDES[POSICION.getX()][POSICION.getY()] = 1;
-        buttons[POSICION.getX()][POSICION.getY()].setBackgroundColor(cont.getResources().getColor(R.color.colorAccent));
-
-        //Cambiando aqui los indices puedes probar diferentes caminos y sus soluciones
+        changeColorButton(buttons[POSICION.getX()][POSICION.getY()],R.color.colorButtonActive,cont);
         CAMINOS_POSIBLES[POSICION.getX()][POSICION.getY()] = 1;
-        //Le mando espaciototal +1 porque en la posicion 0 siempre esta la
-        //coordenadas donde se arranca
+        //Obtengo la solucion unica del juego desde esa posicion
         Coord[] x = generatePath(POSICION, espacioTotal);
-
+        //Desactivo los casilleros que no pertenecen a ese recorrido
         invalidateCoord(x);
-
-
-
+        //Muestra en la consola la solucion al juego
         String s = parseStringCord(x);
-
         Log.e(ETIQUETA, s);
     }
 
+    /*
+    Metodo que permite resetear el color de todos los casilleros
+     */
     private void cleanBackground() {
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
-                buttons[i][j].setBackgroundColor(cont.getResources().getColor(R.color.colorButtonNormal));
+                changeColorButton(buttons[i][j],R.color.colorButtonNormal,cont);
 
             }
         }
     }
 
+    /*
+    Metodos GET y SET necesarios
+     */
+
     public void setCOLUMNAS(int COLUMNAS) {
         this.COLUMNAS = COLUMNAS;
+    }
+
+    public int getCOLUMNAS() {
+        return COLUMNAS;
     }
 
     public int getFILAS() {
@@ -135,11 +148,11 @@ public class Casilleros {
         this.POSICION = POSICION;
     }
 
-    public Button[][] getButtons() {
+    public AppCompatButton[][] getButtons() {
         return buttons;
     }
 
-    public void setButtons(Button[][] buttons) {
+    public void setButtons(AppCompatButton[][] buttons) {
         this.buttons = buttons;
     }
 
@@ -159,6 +172,10 @@ public class Casilleros {
         this.CAMINOS_POSIBLES = CAMINOS_POSIBLES;
     }
 
+    /*
+    Metodo que desactiva aquellos casilleros que no pertenezcan
+    a la solucion del juego
+     */
     public void invalidateCoord(Coord[] x) {
 
         int[][] p = new int[FILAS][COLUMNAS];
@@ -175,7 +192,7 @@ public class Casilleros {
             for (int j = 0; j < COLUMNAS; j++) {
 
                 if (p[i][j] != 1) {
-                    buttons[i][j].setBackgroundColor(cont.getResources().getColor(R.color.colorButtonInactive));
+                    changeColorButton(buttons[i][j],R.color.colorButtonInactive,cont);
                     BORDES[i][j] = 1;
                     espacioOcupado++;
                 }
@@ -186,6 +203,9 @@ public class Casilleros {
 
     }
 
+    /*
+    Metodo que castea las coordenadas como un String
+     */
     public String parseStringCord(Coord[] x) {
 
         String s = "";
@@ -200,6 +220,9 @@ public class Casilleros {
         return s;
     }
 
+    /*
+    Metodo que resetea el juego
+     */
     public void resetGame() {
 
 
@@ -215,11 +238,18 @@ public class Casilleros {
 
     }
 
+    /*
+    Metodo que checkea si el usuario gano la partida
+     */
     public boolean checkWin() {
         return espacioOcupado == espacioTotal;
     }
 
 
+    /*
+    Metodos que asignan las posiciones X y Y de la
+    posicion actual
+     */
     public void setX(int x) {
         POSICION.setX(x);
     }
@@ -228,12 +258,18 @@ public class Casilleros {
         POSICION.setY(y);
     }
 
+    /*
+    Metodo que determina si el movimiento enviado es un
+     movimiento valido ("en L")
+     */
     public boolean validMove(Coord slot1, Coord slot2) {
         return (((Math.abs(slot1.getX() - slot2.getX()) == 2) && (Math.abs(slot1.getY() - slot2.getY()) == 1)) || (((Math.abs(slot1.getX() - slot2.getX()) == 1) && (Math.abs(slot1.getY() - slot2.getY()) == 2))));
     }
 
-
-    //Genera un camino basado en los movimientos desde la posicion inicial de longitud K.
+    /*
+    Metodo que genera un camino basado en los movimientos desde la posicion
+    inicial de longitud K.
+     */
     private Coord[] generatePath(Coord m, int k) {
         Coord[] path = new Coord[k];
         Coord posicionNueva = m;
@@ -258,9 +294,9 @@ public class Casilleros {
         return path;
     }
 
-
-
-    //METODO NUEVO: Determina los movimientos posibles desde la posicion enviada,
+    /*
+    Metodo que determina los movimientos posibles desde la posicion enviada,
+     */
     public Coord[] movPosibles(Coord actual) {
         ArrayList<Coord> posibles = new ArrayList<>();
         ArrayList<Coord> aux = new ArrayList<>();
@@ -330,9 +366,24 @@ public class Casilleros {
         return posiblesArray;
     }
 
-    //METODO NUEVO: Revisa si la posicion dada se encuentra dentro del tablero.
-    private boolean insideBoard(Coord pos) {
+    /*
+    Metodo que revisa si la posicion dada se encuentra dentro del tablero.
+     */
+    public boolean insideBoard(Coord pos) {
         return pos.getX() >= 0 && pos.getX() < FILAS && pos.getY() >= 0 && pos.getY() < COLUMNAS;
+    }
+
+    /*
+    Metodo que permite cambiar el color de un boton de manera general
+     */
+    public void changeColorButton(AppCompatButton b, int dir, Context c){
+
+        b.setSupportBackgroundTintList(ContextCompat.getColorStateList(c,dir));
+
+        //casilleros.getButtons()[i][j].setSupportBackgroundTintList(ContextCompat.getColorStateList(getContext(),R.color.colorButtonActive));
+
+
+
     }
 
 }

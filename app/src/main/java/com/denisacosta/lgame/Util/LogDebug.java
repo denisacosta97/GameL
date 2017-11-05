@@ -6,12 +6,15 @@ import com.denisacosta.lgame.Component.Coord;
 
 import static com.denisacosta.lgame.Util.Util.ETIQUETA;
 
-/**
- * Created by Denis on 4/11/2017.
+/*
+Clase POJO para mandar mensajes por la consola
  */
 
 public class LogDebug {
 
+    public static void showLog(String e,String m){
+        Log.e(e,m);
+    }
 
 
     public static void showElegida(Coord x) {

@@ -1,9 +1,8 @@
 package com.denisacosta.lgame.Component;
 
-/**
- * Created by root on 02/11/17.
+/*
+Clase POJO para manejar las coordenas dentro del juego
  */
-
 public class Coord {
     int x;
     int y;

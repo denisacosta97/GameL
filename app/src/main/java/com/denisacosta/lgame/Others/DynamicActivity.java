@@ -14,7 +14,7 @@ import com.denisacosta.lgame.Component.Coord;
 import com.denisacosta.lgame.R;
 
 /**
- * Created by Denis on 2/11/2017.
+ * Primera clase dinamica de prueba, CANDIDATA A SER BORRADA
  */
 
 public class DynamicActivity extends AppCompatActivity implements View.OnClickListener {
@@ -104,7 +104,7 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
 
         }
 
-        casilleros.setButtons(buttons);
+       // casilleros.setButtons(buttons);
     }
 
 

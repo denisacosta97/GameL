@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    //Colores por defecto de la App
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
-
-
-    <color name="botonInicio">#6EC6D7</color>
-    <color name="botonLetras">#257D8E</color>
-    <color name="colorIcons">#b1f7ff</color>
-    <color name="colorButtonNormal">#17aaf4</color>
-    <color name="colorButtonInactive">#767676</color>
-    <color name="colorButtonActive">#085dc6</color>
-
-
+    //Colores de la Interfaz
     <color name="colorToolbar">#00b2d4</color>
     <color name="colorStage1">#9c9c9c</color>
     <color name="colorStage2">#c7c7c7</color>
     <color name="colorStage3">#e4e3e3</color>
-
+    <color name="botonInicio">#6EC6D7</color>
+    <color name="botonLetras">#257D8E</color>
+    <color name="colorIcons">#b1f7ff</color>
+    //Colores de los Botones-Casilleros
+    <color name="colorButtonNormal">#009be9</color> //Normal
+    <color name="colorButtonInactive">#767676</color> //Invalidos
+    <color name="colorButtonActive">#FF4081</color> //Activos
 </resources>

@@ -1,12 +1,14 @@
 package com.denisacosta.lgame.Util;
 
-/**
- * Created by Denis on 4/11/2017.
+/*
+Clase contenedora de variables estaticas
  */
 
 public class Util {
 
     public static final String ETIQUETA =  "TEST";
+
+    public static final String ETIQUETA_DEBUG =  "DEBUG TEST";
 
     public static final String FILAS = "FILAS";
 

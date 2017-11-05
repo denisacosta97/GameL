@@ -1,22 +1,23 @@
-package com.denisacosta.lgame;
+package com.denisacosta.lgame.Activities;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.denisacosta.lgame.Component.Casilleros;
 import com.denisacosta.lgame.Component.Coord;
 import com.denisacosta.lgame.Interface.LevelComunicate;
 import com.denisacosta.lgame.Interface.PlayZoneComunicate;
+import com.denisacosta.lgame.R;
 import com.denisacosta.lgame.Util.Util;
 
-/**
- * Created by Denis on 4/11/2017.
+/*
+Clase secundaria que se encargara de crear niveles
  */
 
 public class LevelActivity extends Fragment implements View.OnClickListener, PlayZoneComunicate {
@@ -27,6 +28,9 @@ public class LevelActivity extends Fragment implements View.OnClickListener, Pla
     public LevelActivity() {
     }
 
+    /*
+    Metodo que crea la vista general del Fragment LevelActivity
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -43,11 +47,10 @@ public class LevelActivity extends Fragment implements View.OnClickListener, Pla
             int POSY = bundle.getInt(Util.POSY);
 
 
+            casilleros = new Casilleros(FILAS, COLUMNAS, POSX, POSY, getContext());
 
-            casilleros = new Casilleros(FILAS,COLUMNAS,POSX,POSY,getContext());
-
-            Button[][] buttons = new Button[casilleros.getFILAS()][casilleros.getCOLUMNAS()];
-            LinearLayout layoutVertical =  view.findViewById(R.id.llCasillero);
+            AppCompatButton[][] buttons = new AppCompatButton[casilleros.getFILAS()][casilleros.getCOLUMNAS()];
+            LinearLayout layoutVertical = view.findViewById(R.id.llCasillero);
             LinearLayout rowLayout = null;
 
 
@@ -60,8 +63,10 @@ public class LevelActivity extends Fragment implements View.OnClickListener, Pla
 
             for (int i = 0; i < casilleros.getFILAS(); i++) {
 
-                //Esto dice que por cada vez que se complete una fila
-                //baje a la siguiente
+                /*
+                Esto dice que por cada vez que se complete una fila
+                baje a la siguiente
+                */
                 if (count % casilleros.getCOLUMNAS() == 1) {
                     rowLayout = new LinearLayout(getContext());
                     rowLayout.setWeightSum(casilleros.getCOLUMNAS());
@@ -70,9 +75,13 @@ public class LevelActivity extends Fragment implements View.OnClickListener, Pla
                 }
 
                 for (int j = 0; j < casilleros.getCOLUMNAS(); j++) {
-                    buttons[i][j] = new Button(getContext());        //Crea el objeto Button
-                    buttons[i][j].setTag("" + i + j + "");                //Asigna un Tag al objeto
-                    rowLayout.addView(buttons[i][j], params);        //Los agrega a la vista
+                    /*
+                    Creacion dinamica de los botones, asignandole una
+                    etiqueta para ser reconocida en el stage
+                     */
+                    buttons[i][j] = new AppCompatButton(getContext());
+                    buttons[i][j].setTag("" + i + j + "");
+                    rowLayout.addView(buttons[i][j], params);
                 }
             }
 
@@ -89,35 +98,36 @@ public class LevelActivity extends Fragment implements View.OnClickListener, Pla
 
         }
 
+        //Estableciendo comunicacion del Nivel con el PlayZon
         levelComunicate.conectLevelconPlayZone(this);
 
         return view;
     }
 
+    /*
+    Metodo OnClick que controla el comportamiento de los botones,
+    si cambia de color o no al ser un casillero valido
+     */
     @Override
     public void onClick(View view) {
         boolean encontrado = false;
         for (int i = 0; i < casilleros.getFILAS() && !encontrado; i++) {
-            //Agregar condicion para salir del segundo loop una vez se evalue el boton apretado
 
             for (int j = 0; j < casilleros.getCOLUMNAS(); j++) {
 
                 if (view.getTag().equals(casilleros.getButtons()[i][j].getTag())) {
 
-                    //Toast.makeText(this, "Toque boton " + i + " " + j, Toast.LENGTH_SHORT).show();
-
                     if (casilleros.getBORDES()[i][j] == 0) {
                         if (casilleros.validMove(casilleros.getPOSICION(), new Coord(i, j))) {
                             casilleros.getBORDES()[i][j] = 1;
-                            casilleros.getButtons()[i][j].setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            casilleros.changeColorButton(casilleros.getButtons()[i][j], R.color.colorButtonActive, getContext());
                             casilleros.setX(i);
                             casilleros.setY(j);
-                            casilleros.setEspacioOcupado(casilleros.getEspacioOcupado()+1);
+                            casilleros.setEspacioOcupado(casilleros.getEspacioOcupado() + 1);
                             if (casilleros.checkWin()) {
-                                levelComunicate.dialogGanaste("NIVEL 1","",getContext());
-                                //casilleros.resetGame();
-                            }else if (checkMovements())
-                                levelComunicate.dialogPerdiste("NIVEL 1","",getContext());
+                                levelComunicate.dialogGanaste(getResources().getString(R.string.txtNivel), "", getContext());
+                            } else if (checkMovements())
+                                levelComunicate.dialogPerdiste(getResources().getString(R.string.txtNivel), "", getContext());
                         }
                     }
 
@@ -128,20 +138,19 @@ public class LevelActivity extends Fragment implements View.OnClickListener, Pla
         }
     }
 
-    public void resetGame(){
-
-        this.casilleros.resetGame();
-    }
-
+    /*
+    Metodo que checkea si existen movimientos validos desde la posicion donde
+    se encuentra
+     */
     private boolean checkMovements() {
 
         Coord[] c = casilleros.movPosibles(casilleros.getPOSICION());
         int mov = 0;
-        for (Coord x:c){
+        for (Coord x : c) {
 
-            if (x!=null){
+            if (x != null) {
 
-                if (casilleros.getBORDES()[x.getX()][x.getY()] == 0){
+                if (casilleros.getBORDES()[x.getX()][x.getY()] == 0) {
 
                     mov++;
 
@@ -151,9 +160,13 @@ public class LevelActivity extends Fragment implements View.OnClickListener, Pla
 
         }
 
-        return mov==0;
+        return mov == 0;
     }
 
+    /*
+    Metodos onAtach y onDetach sirven para establecer la comunicacion del
+    Fragment con la Actividad mediante las interfaces
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -166,7 +179,10 @@ public class LevelActivity extends Fragment implements View.OnClickListener, Pla
         levelComunicate = null;
     }
 
-    //Metodo de la Interfraz PlayZoneComunicate
+    /*
+    Metodo de la Interfraz PlayZoneComunicate que permite
+    resetear el juego
+     */
     @Override
     public void resetGame(int c) {
         casilleros.resetGame();
