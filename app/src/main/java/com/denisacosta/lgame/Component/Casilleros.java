@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Button;
 
-import com.denisacosta.lgame.DynamicActivity;
+import com.denisacosta.lgame.Others.DynamicActivity;
 import com.denisacosta.lgame.R;
 
 import java.util.ArrayList;
@@ -52,6 +52,10 @@ public class Casilleros {
 
     public void selectInicio() {
 
+        cleanBackground();
+
+        espacioOcupado = 1;
+
         BORDES[POSICION.getX()][POSICION.getY()] = 1;
         buttons[POSICION.getX()][POSICION.getY()].setBackgroundColor(cont.getResources().getColor(R.color.colorAccent));
 
@@ -67,8 +71,16 @@ public class Casilleros {
 
         String s = parseStringCord(x);
 
-        ((DynamicActivity)cont).addSolution(s);
         Log.e(ETIQUETA, s);
+    }
+
+    private void cleanBackground() {
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                buttons[i][j].setBackgroundColor(cont.getResources().getColor(R.color.colorButtonNormal));
+
+            }
+        }
     }
 
     public void setCOLUMNAS(int COLUMNAS) {
@@ -163,7 +175,7 @@ public class Casilleros {
             for (int j = 0; j < COLUMNAS; j++) {
 
                 if (p[i][j] != 1) {
-                    buttons[i][j].setBackgroundColor(cont.getResources().getColor(R.color.colorInactive));
+                    buttons[i][j].setBackgroundColor(cont.getResources().getColor(R.color.colorButtonInactive));
                     BORDES[i][j] = 1;
                     espacioOcupado++;
                 }
@@ -189,11 +201,18 @@ public class Casilleros {
     }
 
     public void resetGame() {
+
+
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
                 BORDES[i][j] = 0;
+                CAMINOS_POSIBLES[i][j]=0;
+
             }
         }
+        POSICION = new Coord(getPOSX(),getPOSY());
+        selectInicio();
+
     }
 
     public boolean checkWin() {
@@ -242,7 +261,7 @@ public class Casilleros {
 
 
     //METODO NUEVO: Determina los movimientos posibles desde la posicion enviada,
-    private Coord[] movPosibles(Coord actual) {
+    public Coord[] movPosibles(Coord actual) {
         ArrayList<Coord> posibles = new ArrayList<>();
         ArrayList<Coord> aux = new ArrayList<>();
 

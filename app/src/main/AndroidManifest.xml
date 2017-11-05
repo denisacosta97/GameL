@@ -9,10 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Others.MainActivity">
 
         </activity>
-        <activity android:name=".DynamicActivity">
+        <activity android:name=".PlayZoneActivity">
+
+        </activity>
+        <activity android:name=".Others.DynamicActivity">
 
         </activity>
         <activity android:name=".InicioActivity"

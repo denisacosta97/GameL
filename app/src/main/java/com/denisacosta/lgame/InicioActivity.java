@@ -3,12 +3,12 @@ package com.denisacosta.lgame;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import com.denisacosta.lgame.Others.DynamicActivity;
+import com.denisacosta.lgame.Util.Util;
 
 /**
  * Created by Denis on 3/11/2017.
@@ -43,11 +43,11 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         switch (view.getId()){
 
             case R.id.btnJugar:
-                Intent i = new Intent(this,DynamicActivity.class);
-                i.putExtra("FILA", editFila.getText().toString());
-                i.putExtra("COL", editCol.getText().toString());
-                i.putExtra("X",editPosX.getText().toString());
-                i.putExtra("Y",editPosY.getText().toString());
+                Intent i = new Intent(this,PlayZoneActivity.class);
+                i.putExtra(Util.FILAS, editFila.getText().toString());
+                i.putExtra(Util.COLUMNAS, editCol.getText().toString());
+                i.putExtra(Util.POSX,editPosX.getText().toString());
+                i.putExtra(Util.POSY,editPosY.getText().toString());
                 startActivity(i);
                 break;
 

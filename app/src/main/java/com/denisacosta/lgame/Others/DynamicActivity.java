@@ -1,4 +1,4 @@
-package com.denisacosta.lgame;
+package com.denisacosta.lgame.Others;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.denisacosta.lgame.Component.Casilleros;
 import com.denisacosta.lgame.Component.Coord;
+import com.denisacosta.lgame.R;
 
 /**
  * Created by Denis on 2/11/2017.
