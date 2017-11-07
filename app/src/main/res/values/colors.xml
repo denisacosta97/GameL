@@ -16,4 +16,10 @@
     <color name="colorButtonNormal">#009be9</color> //Normal
     <color name="colorButtonInactive">#767676</color> //Invalidos
     <color name="colorButtonActive">#FF4081</color> //Activos
+
+
+    <color name="botonInicioEnf">#70b3bf</color>
+    <color name="botonLetrasEnf">#367a87</color>
+    <color name="botonInicioPre">#9ce6f4</color>
+    <color name="botonLetrasPre">#398f9f</color>
 </resources>

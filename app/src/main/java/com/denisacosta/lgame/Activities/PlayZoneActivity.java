@@ -2,6 +2,11 @@ package com.denisacosta.lgame.Activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.FragmentManager;
@@ -25,12 +30,16 @@ Clase principal donde se encuentran todos los controles y niveles
 
 public class PlayZoneActivity extends AppCompatActivity implements View.OnClickListener, LevelComunicate {
 
-    ImageView imgBack;
+    ImageView imgBack, imgChica;
     LinearLayout llButons, llControl;
     FrameLayout llLevel;
     Bundle extras;
     PlayZoneComunicate playZoneComunicate;
     Chronometer chronometer;
+    AnimationDrawable animationDrawable;  //                                EN MS
+    final int FRAME_W = 85*2, FRAME_H = 121*2, FRAMES = 14, CANT_X = 5, CANT_Y = 3, FRAME_DURATION = 120,
+            SCALE_FACTOR = 5;
+    Bitmap[] bitmaps;
 
 
     /*
@@ -90,6 +99,50 @@ public class PlayZoneActivity extends AppCompatActivity implements View.OnClickL
             chronometer.start();
 
         }
+
+        imgChica = findViewById(R.id.imgPintor);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.grossini_dance1);
+
+        bitmaps = new Bitmap[FRAMES];
+
+        int currenFrame = 0;
+        for(int i = 0; i<CANT_Y;i++){
+            for(int j = 0;j<CANT_X;j++){
+
+                bitmaps[currenFrame] = Bitmap.createBitmap(bitmap,FRAME_W * j,FRAME_H * i, FRAME_W,FRAME_H);
+
+                //bitmaps[currenFrame] = Bitmap.createScaledBitmap(bitmaps[currenFrame],FRAME_W * SCALE_FACTOR,
+                //FRAME_H * SCALE_FACTOR,true);
+
+                if (++currenFrame >= FRAMES)
+                    break;
+
+            }
+        }
+
+        animationDrawable = new AnimationDrawable();
+        animationDrawable.setOneShot(false); //Para repetir
+
+        for (int m = 0; m<FRAMES;m++){
+            animationDrawable.addFrame(new BitmapDrawable(getResources(),bitmaps[m]),FRAME_DURATION);
+
+        }
+
+        if (Build.VERSION.SDK_INT < 16){
+            imgChica.setBackgroundDrawable(animationDrawable);
+        }else{
+            imgChica.setBackground(animationDrawable);
+
+        }
+
+        imgChica.post(new Runnable() {
+            @Override
+            public void run() {
+                animationDrawable.start();
+
+            }
+        });
     }
 
     /*

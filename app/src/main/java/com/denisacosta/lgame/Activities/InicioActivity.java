@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.denisacosta.lgame.Others.MainActivity;
 import com.denisacosta.lgame.R;
 import com.denisacosta.lgame.Util.Util;
 
@@ -24,7 +25,6 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
-
 
         btnJugar = findViewById(R.id.btnJugar);
         editPosX = findViewById(R.id.editTPosX);

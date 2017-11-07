@@ -8,12 +8,11 @@ import android.widget.Button;
 
 import com.denisacosta.lgame.Others.DynamicActivity;
 import com.denisacosta.lgame.R;
+import com.denisacosta.lgame.Util.Util;
 
 import java.util.ArrayList;
 
-import static com.denisacosta.lgame.Util.LogDebug.showElegida;
-import static com.denisacosta.lgame.Util.LogDebug.showPosibilidades;
-import static com.denisacosta.lgame.Util.Util.ETIQUETA;
+
 
 /**
  * Created by Denis on 4/11/2017.
@@ -73,7 +72,7 @@ public class Casilleros {
         invalidateCoord(x);
         //Muestra en la consola la solucion al juego
         String s = parseStringCord(x);
-        Log.e(ETIQUETA, s);
+        Log.e(Util.ETIQUETA, s);
     }
 
     /*
@@ -276,12 +275,12 @@ public class Casilleros {
         path[0] = m;
         for (int c = 1; c < k; c++) { //Ciclo para lograr un camino de longitud K.
             Coord[] posibilidades = movPosibles(posicionNueva); //Determina las posibles ubicaciones a las cuales se puede mover desde posicionNueva
-            showPosibilidades(posibilidades); //Muestra en la Consola las posiciones posibles
+            Util.showPosibilidades(posibilidades); //Muestra en la Consola las posiciones posibles
             if (posibilidades.length > 0) {//Si puede hacer al menos un movimiento desde posicionNueva
                 for (Coord s : posibilidades) {
                     if (CAMINOS_POSIBLES[s.getX()][s.getY()] == 0) { //Por cada posibilidad pregunto si esta disponible
                         path[c] = s; //La agrego al array, siempre tiene en cuenta la primera posicion no ocupada
-                        showElegida(s); //La muestro para tener un control
+                        Util.showElegida(s); //La muestro para tener un control
                         posicionNueva = s; //Y esa sera la nueva posicion donde buscare nuevas posibilidades
                         CAMINOS_POSIBLES[s.getX()][s.getY()] = 1; //Indico que esa posicion ya se ocupo
                         break; //Salgo el ciclo de posibilidades
